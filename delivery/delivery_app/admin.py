@@ -3,24 +3,40 @@ from django.utils.safestring import mark_safe
 
 from .models import *
 
-# Register your models here.
-class DishInLine(admin.TabularInline):
-    model = Restaurant.menu.through
-    extra = 1
+
+class DishInLine(admin.StackedInline):
+    # model = Restaurant.menu.through
+    model = Dish
+    extra = 3
     # fields = ("name", "ingredients", "price", )
+    readonly_fields = ("get_big_image",)
+    fields = (('name', 'price'),
+              'ingredients',
+              ('image', "get_big_image"))
+
+    def get_big_image (self, obj):
+        if obj.image :
+            return  mark_safe(f'<img src={obj.image.url} width=200px height=auto')
+        else:
+            return 'Нет картинки'
+
+    get_big_image.short_description = "Картинка"
+
 
 
 @admin.register(Dish)
 class DishAdmin (admin.ModelAdmin):
-    list_display = ('name', 'price', 'ingredients', "get_image")
+    list_display = ('name', 'price', 'ingredients')
+    # list_display = ('name', 'price', 'ingredients', "get_image")
     list_display_links = ('name',)
     readonly_fields = ("get_big_image",)
-
-    def get_image (self, obj):
-        if obj.image :
-            return  mark_safe(f'<img src={obj.image.url} width=50px height=50px')
-        else:
-            return 'Нет картинки'
+    save_on_top = True
+    #
+    # def get_image (self, obj):
+    #     if obj.image :
+    #         return  mark_safe(f'<img src={obj.image.url} width=50px height=50px')
+    #     else:
+    #         return 'Нет картинки'
 
     def get_big_image (self, obj):
         if obj.image :
@@ -28,7 +44,7 @@ class DishAdmin (admin.ModelAdmin):
         else:
             return 'Нет картинки'
 
-    get_image.short_description = "Картинка"
+    # get_image.short_description = "Картинка"
     get_big_image.short_description = "Картинка"
 
 
@@ -53,3 +69,7 @@ class RestaurantAdmin(admin.ModelAdmin):
               ('image', 'get_big_image'))
 
     get_big_image.short_description = "Картинка"
+
+
+admin.site.site_title = "Доставка из ресторанов"
+admin.site.site_header = "Доставка из ресторанов"

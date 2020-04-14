@@ -4,9 +4,10 @@ from django.db import models
 
 class Dish (models.Model):
     name = models.CharField (max_length=100, verbose_name='Название блюда')
-    ingredients = models.CharField(max_length=500, verbose_name='Состав блюда')
+    ingredients = models.TextField(verbose_name='Состав блюда')
     price = models.IntegerField(verbose_name='Цена блюда')
     image = models.ImageField(upload_to='images/dishes/%Y/%m/%d/', blank=True, verbose_name='Изображение блюда')
+    restaurant = models.ForeignKey ("Restaurant", verbose_name="Ресторан", on_delete=models.CASCADE, default=1)
 
     class Meta:
         verbose_name = "Блюдо"
@@ -23,7 +24,7 @@ class Restaurant (models.Model):
     price_level = models.CharField (max_length=20, verbose_name='Уровень цен')
     category = models.CharField(max_length=100, verbose_name='Категория ресторана')
     image = models.ImageField (upload_to='images/restaurants/%Y/%m/%d/', blank=True, verbose_name="Изображение ресторана")
-    menu = models.ManyToManyField ('Dish', blank=True, null=True)
+    # menu = models.ManyToManyField ('Dish', blank=True)
 
     class Meta:
         verbose_name = "Ресторан"
