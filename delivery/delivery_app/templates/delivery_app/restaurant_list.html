@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>Привет!!!</h2>
+
+<ul>
+    {% for restaurant in restaurants %}
+        <li>
+            {{ restaurant.name }},
+            {{ restaurant.delivery_time }},
+            {{ restaurant.pk }}
+            <ul>
+            {% for dish in dishes %}
+                {% if dish.restaurant.pk == restaurant.pk %}
+                <li>
+                    {{ dish.name }}, {{ dish.restaurant.pk }}, {{ restaurant.pk }}
+                </li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>
+
+{{ tanuki_dishes }}
+
+
+</body>
+</html>

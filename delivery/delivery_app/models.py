@@ -7,7 +7,7 @@ class Dish (models.Model):
     ingredients = models.TextField(verbose_name='Состав блюда')
     price = models.IntegerField(verbose_name='Цена блюда')
     image = models.ImageField(upload_to='images/dishes/%Y/%m/%d/', blank=True, verbose_name='Изображение блюда')
-    restaurant = models.ForeignKey ("Restaurant", verbose_name="Ресторан", on_delete=models.CASCADE, default=1)
+    restaurant = models.ForeignKey ("Restaurant", verbose_name="Ресторан", on_delete=models.CASCADE, default=1, related_name='dishes')
 
     class Meta:
         verbose_name = "Блюдо"
