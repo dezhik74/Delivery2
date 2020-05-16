@@ -1,8 +1,9 @@
-from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView, TemplateView
+# from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView, DetailView
 from .models import Restaurant, Dish
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework import generics
+# from rest_framework.response import Response
+# from rest_framework.views import APIView
 from .serializers import RestaurantListSerializer, RestaurantDetailSerializer
 
 # Create your views here.
@@ -33,16 +34,24 @@ class RestaurantDetailView (DetailView):
         return context
 
 
-class RestaurantListAPIVew (APIView):
+class RestaurantListAPIVew (generics.ListAPIView):
+    queryset = Restaurant.objects.all()
+    serializer_class = RestaurantListSerializer
 
-    def get(self, request):
-        restaurants = Restaurant.objects.all()
-        serializer = RestaurantListSerializer(restaurants, many =  True)
-        return Response(serializer.data)
+# class RestaurantListAPIVew (APIView):
+#
+#     def get(self, request):
+#         restaurants = Restaurant.objects.all()
+#         serializer = RestaurantListSerializer(restaurants, many =  True)
+#         return Response(serializer.data)
 
-class RestaurantDetailAPIView (APIView):
+class RestaurantDetailAPIView (generics.RetrieveAPIView):
+    queryset = Restaurant.objects.all()
+    serializer_class = RestaurantDetailSerializer
 
-    def get(self, request, pk):
-        restaurant = get_object_or_404(Restaurant, pk=pk)
-        serializer = RestaurantDetailSerializer(restaurant)
-        return Response(serializer.data)
+# class RestaurantDetailAPIView (APIView):
+#
+#     def get(self, request, pk):
+#         restaurant = get_object_or_404(Restaurant, pk=pk)
+#         serializer = RestaurantDetailSerializer(restaurant)
+#         return Response(serializer.data)

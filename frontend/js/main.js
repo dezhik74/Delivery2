@@ -114,7 +114,7 @@ function createCardRestaurant ({
   const card = `
   <a class="card card-restaurant" id="${id}"
     data-name="${name}" data-rating="${stars}" data-price="${price}" data-kitchen="${kitchen}">
-    <img src="${ROOT_ADDRESS + image}" alt="image" class="card-image"/>
+    <img src="${image}" alt="image" class="card-image"/>
     <div class="card-text">
       <div class="card-heading">
         <h3 class="card-title">${name}</h3>
@@ -158,7 +158,7 @@ function createCardGood ({ id, name, ingredients:description, price, image }) {
   const card = document.createElement('div');
   card.className = 'card';
   card.insertAdjacentHTML('beforeend', `
-    <img src="${ROOT_ADDRESS + image}" alt="image" class="card-image"/>
+    <img src="${image}" alt="image" class="card-image"/>
     <div class="card-text">
       <div class="card-heading">
         <h3 class="card-title card-title-reg">${name}</h3>
