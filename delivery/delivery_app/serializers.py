@@ -13,7 +13,7 @@ class RestaurantListSerializer (serializers.ModelSerializer):
 
     class Meta:
         model = Restaurant
-        fields =('name', 'delivery_time', 'rating', 'price_level', 'category', 'image')
+        fields =('id','name', 'delivery_time', 'rating', 'price_level', 'category', 'image')
 
 
 class RestaurantDetailSerializer (serializers.ModelSerializer):
