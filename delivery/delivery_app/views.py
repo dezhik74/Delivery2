@@ -21,6 +21,7 @@ class RestaurantListView (ListView):
         context['dishes'] = Dish.objects.all()
         return context
 
+
 class RestaurantDetailView (DetailView):
     model = Restaurant
     context_object_name = 'restaurant'
@@ -44,6 +45,7 @@ class RestaurantListAPIVew (generics.ListAPIView):
 #         restaurants = Restaurant.objects.all()
 #         serializer = RestaurantListSerializer(restaurants, many =  True)
 #         return Response(serializer.data)
+
 
 class RestaurantDetailAPIView (generics.RetrieveAPIView):
     queryset = Restaurant.objects.all()
