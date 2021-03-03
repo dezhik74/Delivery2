@@ -1,17 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>{{ restaurant.name }}</h1>
-    <ul>
-        {% for dish in dishes %}
-            <li>
-                {{ dish.name }}
-            </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends 'delivery_app/base.html' %}
+{% block main_block %}
+<main class="main">
+    <div class="container">
+        <section class="menu">
+            <div class="section-heading restaurant-menu">
+                <h2 class="section-title restaurant-title">{{restaurant.name}}</h2>
+                <div class="card-info">
+                    <div class="rating">
+                        {{restaurant.rating}}
+                    </div>
+                    <div class="price">От {{restaurant.price_level}} ₽</div>
+                    <div class="category">{{restaurant.category}}</div>
+                </div>
+            </div>
+            <div class="cards cards-menu">
+                {% for dish in dishes %}
+                <div class="card">
+                    <img src="{{dish.image.url}}" alt="image" class="card-image"/>
+                    <div class="card-text">
+                        <div class="card-heading">
+                            <h3 class="card-title card-title-reg">{{dish.name}}</h3>
+                        </div>
+                        <div class="card-info">
+                            <div class="ingredients">
+                                {{dish.ingredients}}
+                            </div>
+                        </div>
+                        <div class="card-buttons">
+                            <button class="button button-primary button-add-cart" id=${id}>
+                                <span class="button-card-text">В корзину</span>
+                                <span class="button-cart-svg"></span>
+                            </button>
+                            <strong class="card-price card-price-bold">{{dish.price}} ₽</strong>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            <!-- сюда скрипт вставит все карточки товаров/блюд ресторана -->
+            </div>
+        <!-- /.cards -->
+        </section>
+
+</main>
+{% endblock %}
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h1>{{ restaurant.name }}</h1>-->
+<!--    <ul>-->
+<!--        {% for dish in dishes %}-->
+<!--            <li>-->
+<!--                {{ dish.name }}-->
+<!--            </li>-->
+<!--        {% endfor %}-->
+<!--    </ul>-->
+<!--</body>-->
+<!--</html>-->

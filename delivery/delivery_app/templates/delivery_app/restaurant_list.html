@@ -1,34 +1,105 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'delivery_app/base.html' %}
+{% block main_block %}
+	<main class="main">
+		<div class="container">
+			<section class="container-promo">
+				<section class="promo {{promo_back}}">
+					<h1 class="promo-title">Онлайн-сервис <br/>доставки еды на дом</h1>
+					<p class="promo-text">
+						{{promo_text}}
+					</p>
+				</section>
+			</section>
+			<section class="restaurants">
+				<div class="section-heading">
+					<h2 class="section-title">Рестораны</h2>
+					<label class="search">
+						<input type="text" class="input input-search" placeholder="Поиск блюд и ресторанов"/>
+					</label>
+				</div>
+				<div class="cards cards-restaurants">
+					{% for restaurant in restaurants %}
+						<a class="card card-restaurant" data-name="{{restaurant.name}}" data-pk="{{restaurant.pk}}"
+						data-rating="{{restaurant.rating}}" data-price="{{restaurant.price_level}}"
+					    data-kitchen="{{restaurant.category}}" href="{{restaurant.get_absolute_url}}">
+							<img src="{{restaurant.image.url}}" alt="image" class="card-image"/>
+							<div class="card-text">
+							  <div class="card-heading">
+								<h3 class="card-title">{{restaurant.name}}</h3>
+								<span class="card-tag tag">{{restaurant.delivery_time}} мин</span>
+							  </div>
+							  <div class="card-info">
+								<div class="rating">
+									{{restaurant.rating}}
+								</div>
+								<div class="price">От {{restaurant.price_level}} ₽</div>
+								<div class="category">{{restaurant.category}}</div>
+							  </div>
+							</div>
+						</a>
+					{% endfor %}
+				</div>
+				<!-- /.cards -->
+			</section>
+			<section class="menu hide">
+				<div class="section-heading restaurant-menu">
+					<!-- /.card-info -->
+				</div>
+				<div class="cards cards-menu">
+					<!-- сюда скрипт вставит все карточки товаров/блюд ресторана -->
+				</div>
+				<!-- /.cards -->
+			</section>
 
-<h2>Привет!!!</h2>
+		</div>
+		<!-- /.container -->
+	</main>
 
-<ul>
-    {% for restaurant in restaurants %}
-        <li>
-            {{ restaurant.name }},
-            {{ restaurant.delivery_time }},
-            {{ restaurant.pk }}
-            <ul>
-            {% for dish in dishes %}
-                {% if dish.restaurant.pk == restaurant.pk %}
-                <li>
-                    {{ dish.name }}, {{ dish.restaurant.pk }}, {{ restaurant.pk }}
-                </li>
-                {% endif %}
-            {% endfor %}
-            </ul>
-        </li>
-    {% endfor %}
-</ul>
+{% endblock %}
 
-{{ tanuki_dishes }}
+{% block my_java_script %}
+<!--<script>-->
+<!--	document.querySelector('.cards-restaurants').addEventListener("click", event => (){-->
+<!--		const target = event.target;-->
+<!--		const restaurant = target.closest('.card-restaurant');-->
+<!--		-->
+
+<!--	})-->
+
+</script>
+{% endblock %}
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<h2>Привет!!!</h2>-->
+
+<!--<ul>-->
+<!--    {% for restaurant in restaurants %}-->
+<!--        <li>-->
+<!--            {{ restaurant.name }},-->
+<!--            {{ restaurant.delivery_time }},-->
+<!--            {{ restaurant.pk }}-->
+<!--            <ul>-->
+<!--            {% for dish in dishes %}-->
+<!--                {% if dish.restaurant.pk == restaurant.pk %}-->
+<!--                <li>-->
+<!--                    {{ dish.name }}, {{ dish.restaurant.pk }}, {{ restaurant.pk }}-->
+<!--                </li>-->
+<!--                {% endif %}-->
+<!--            {% endfor %}-->
+<!--            </ul>-->
+<!--        </li>-->
+<!--    {% endfor %}-->
+<!--</ul>-->
+
+<!--{{ tanuki_dishes }}-->
 
 
-</body>
-</html>
+<!--</body>-->
+<!--</html>-->

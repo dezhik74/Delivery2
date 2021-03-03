@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import reverse
 
 
 class Dish (models.Model):
@@ -33,3 +34,6 @@ class Restaurant (models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('restaurant_detail_url', kwargs={'pk': self.pk})
