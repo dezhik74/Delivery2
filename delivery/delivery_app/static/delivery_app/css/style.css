@@ -145,8 +145,13 @@ button {
 }
 
 .button-cart {
-    display: none;
+    /* display: none;*/
     margin: 0 5px;
+    text-decoration: none;
+}
+
+.button-add-cart {
+    text-decoration: none
 }
 
 .button-out {

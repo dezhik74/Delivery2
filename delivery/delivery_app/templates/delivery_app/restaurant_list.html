@@ -4,9 +4,14 @@
 		<div class="container">
 			<section class="container-promo">
 				<section class="promo {{promo_back}}">
+					<style>
+						.promo {
+							background: {{promo.promo_color}} url({{promo.promo_img.url}})
+							}
+					</style>
 					<h1 class="promo-title">Онлайн-сервис <br/>доставки еды на дом</h1>
 					<p class="promo-text">
-						{{promo_text}}
+						{{promo.promo_text}}
 					</p>
 				</section>
 			</section>

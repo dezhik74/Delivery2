@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Dish, Restaurant
+from .models import Dish, Restaurant, PromoBox
 
 
 class DishInLine(admin.StackedInline):
@@ -38,9 +38,9 @@ class DishAdmin (admin.ModelAdmin):
     #     else:
     #         return 'Нет картинки'
 
-    def get_big_image (self, obj):
-        if obj.image :
-            return  mark_safe(f'<img src={obj.image.url} width=400px height=auto')
+    def get_big_image(self, obj):
+        if obj.image:
+            return mark_safe(f'<img src={obj.image.url} width=400px height=auto')
         else:
             return 'Нет картинки'
 
@@ -60,13 +60,26 @@ class RestaurantAdmin(admin.ModelAdmin):
 
     def get_big_image (self, obj):
         if obj.image :
-            return  mark_safe(f'<img src={obj.image.url} width=300px height=auto')
+            return mark_safe(f'<img src={obj.image.url} width=300px height=auto')
         else:
             return 'Нет картинки'
 
     fields = (('name', 'category'),
               ('delivery_time', 'rating', 'price_level'),
               ('image', 'get_big_image'))
+
+    get_big_image.short_description = "Картинка"
+
+
+@admin.register(PromoBox)
+class PromoBoxAdmin(admin.ModelAdmin):
+    readonly_fields = ("get_big_image",)
+
+    def get_big_image(self, obj):
+        if obj.promo_img:
+            return mark_safe(f'<img src={obj.promo_img.url} width=400px height=auto')
+        else:
+            return 'Нет картинки'
 
     get_big_image.short_description = "Картинка"
 

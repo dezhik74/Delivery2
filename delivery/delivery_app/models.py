@@ -26,7 +26,6 @@ class Restaurant (models.Model):
     category = models.CharField(max_length=100, verbose_name='Категория ресторана')
     image = models.ImageField(upload_to='images/restaurants/%Y/%m/%d/', blank=True,
                                verbose_name="Изображение ресторана")
-    # menu = models.ManyToManyField ('Dish', blank=True)
 
     class Meta:
         verbose_name = "Ресторан"
@@ -37,3 +36,17 @@ class Restaurant (models.Model):
 
     def get_absolute_url(self):
         return reverse('restaurant_detail_url', kwargs={'pk': self.pk})
+
+
+class PromoBox (models.Model):
+    promo_text = models.TextField(verbose_name='Текст промо')
+    promo_color = models.CharField(max_length=100, verbose_name='Цвет подложки промо и позиционирование')
+    promo_img = models.ImageField(upload_to='images/promo/', blank=True, verbose_name='Картинка промо (png)')
+
+    class Meta:
+        verbose_name = "Промо постер"
+        verbose_name_plural = "Промо постеры"
+
+    def __str__(self):
+        return self.promo_text[0:50] + '...'
+

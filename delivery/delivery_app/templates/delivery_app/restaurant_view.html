@@ -27,10 +27,10 @@
                             </div>
                         </div>
                         <div class="card-buttons">
-                            <button class="button button-primary button-add-cart" id=${id}>
+                            <a class="button button-primary button-add-cart" href="{% url 'dish_to_basket_url' restaurant.pk dish.pk %}" >
                                 <span class="button-card-text">В корзину</span>
                                 <span class="button-cart-svg"></span>
-                            </button>
+                            </a>
                             <strong class="card-price card-price-bold">{{dish.price}} ₽</strong>
                         </div>
                     </div>

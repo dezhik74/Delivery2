@@ -27,10 +27,12 @@
                     <span class="button-auth-svg"></span>
                     <span class="button-text">Войти</span>
                 </button>
-                <button class="button button-cart" id="cart-button">
-                    <span class="button-cart-svg"></span>
-                    <span class="button-text">Корзина</span>
-                </button>
+                {% if cart_total != 0 %}
+                    <a class="button button-cart" id="cart-button" href="{% url 'cart' %}">
+                        <span class="button-cart-svg"></span>
+                        <span class="button-text">Корзина на {{cart_total}} ₽</span>
+                    </a>
+                {% endif %}
                 <button class="button button-primary button-out">
                     <span class="button-text">Выйти</span>
                     <span class="button-out-svg"></span>

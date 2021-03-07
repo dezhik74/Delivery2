@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ebzzd1nal2bgls_bxz8d!7*u-)&(^i8(y^e^^hr2hr#!guye$-'
+SECRET_KEY = 'ebzzd1nal2bgls_bxz8d!7*u-)&(^i8sdfgsdv sdfsd fsdd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    # 'delivery_app.middleware.BasketMiddleware',
     # 'django.middleware.common.CommonMiddleware',
 ]
 
@@ -136,3 +137,5 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:8000',
     'http://localhost:5500',
 ]
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
