@@ -18,15 +18,15 @@
             <a class="logo" href="{% url 'restaurants_list_url' %}">
                 <img src="{% static 'delivery_app/img/icon/logo.svg' %}" alt="Logo"/>
             </a>
-            <label class="address">
-                <input type="text" class="input input-address" placeholder="Адрес доставки"/>
-            </label>
+<!--            <label class="address">-->
+<!--                <input type="text" class="input input-address" placeholder="Адрес доставки"/>-->
+<!--            </label>-->
             <div class="buttons">
                 <span class="user-name"></span>
-                <button class="button button-primary button-auth">
-                    <span class="button-auth-svg"></span>
-                    <span class="button-text">Войти</span>
-                </button>
+<!--                <button class="button button-primary button-auth">-->
+<!--                    <span class="button-auth-svg"></span>-->
+<!--                    <span class="button-text">Войти</span>-->
+<!--                </button>-->
                 {% if cart_total != 0 %}
                     <a class="button button-cart" id="cart-button" href="{% url 'cart' %}">
                         <span class="button-cart-svg"></span>

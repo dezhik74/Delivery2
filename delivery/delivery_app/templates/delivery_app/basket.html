@@ -1,6 +1,59 @@
 {% extends 'delivery_app/base.html' %}
 {% block main_block %}
 
-<h2>Корзина</h2>
+<div class="modal modal-cart">
+		<div class="modal-dialog">
+			<div class="modal-header">
+				<h3 class="modal-title">Корзина</h3>
+			</div>
+			<!-- /.modal-header -->
+			<div class="modal-body cart-modal-body">
+				{{ cart }}
+				<br><br>
+				{% if cart %}
+					{% for key, dish in cart.items %}
+						<div class="food-row">
+							<span class="food-name">{{dish.name}}</span>
+							<strong class="food-price">{{dish.price}} ₽</strong>
+							<div class="food-counter">
+							  <button class="counter-button counter-minus" data-id="${id}">-</button>
+							  <span class="counter">{{dish.count}}</span>
+							  <button class="counter-button counter-plus" data-id="${id}">+</button>
+							</div>
+						</div>
+					{% endfor %}
+				{% else %}
+					<div class="food-row">
+						Корзина пустая
+					</div>
+				{% endif %}
+			</div>
+			<!-- /.modal-body -->
+			<div class="modal-footer">
+				<span class="modal-pricetag">
+					{% if cart_total %}
+						{{cart_total}} ₽
+					{% else %}
+						- ₽
+					{% endif %}
+				</span>
+				<div class="footer-buttons">
+					<button class="button button-primary">Оформить заказ</button>
+					<button class="button clear-cart">Отмена</button>
+				</div>
+			</div>
+			<!-- /.modal-footer -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+{% endblock %}
 
+{% block my_java_script %}
+<script>
+	let cart = '{{cart|escapejs}}';
+	cart = cart.replace(/'/g, '"');
+	cart = JSON.parse(cart);
+	console.log (cart);
+	const basket_field = document.querySelector(".cart-modal-body");
+</script>
 {% endblock %}

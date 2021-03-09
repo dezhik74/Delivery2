@@ -2,7 +2,7 @@
 from django.shortcuts import redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, TemplateView
 from .models import Restaurant, Dish, PromoBox
-from .basket import basket_add, basket_total
+from .basket import basket_add, basket_total, get_basket_as_dict
 from rest_framework import generics
 # from rest_framework.response import Response
 # from rest_framework.views import APIView
@@ -31,7 +31,7 @@ class RestaurantListView (ListView):
         context['promo'] = PromoBox.objects.get(pk=random.randint(1, len(PromoBox.objects.all())))
         # context['promo_back'] = promo_backs[random.randint(0, 3)]
         # context['promo_text'] = promo_texts[random.randint(0, 3)]
-        # context['cart_total'] = basket_total(self.request)
+        context['cart_total'] = basket_total(self.request)
         return context
 
 
@@ -61,6 +61,7 @@ class Cart(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['cart_total'] = basket_total(self.request)
+        context['cart'] = get_basket_as_dict(self.request)
         return context
 
 
