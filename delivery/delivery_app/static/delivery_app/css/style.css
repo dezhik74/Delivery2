@@ -76,6 +76,7 @@ button {
     color: #595959;
     font-size: 16px;
     line-height: 24px;
+    text-decoration: none;
 }
 
 .button:hover {
@@ -543,6 +544,7 @@ button {
     font-size: 14px;
     line-height: 22px;
     color: #40a9ff;
+    text-decoration: none;
 }
 
 .counter-button:hover {
@@ -580,6 +582,12 @@ button {
     padding: 15px 20px;
     font-size: 20px;
     line-height: 23px;
+}
+
+.modal-footer-in-order {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 @media (max-width: 1366px) {

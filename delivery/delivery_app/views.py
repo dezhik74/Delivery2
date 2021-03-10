@@ -2,7 +2,7 @@
 from django.shortcuts import redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, TemplateView
 from .models import Restaurant, Dish, PromoBox
-from .basket import basket_add, basket_total, get_basket_as_dict
+from .basket import basket_add, basket_total, get_basket_as_dict, basket_sub, basket_clear
 from rest_framework import generics
 # from rest_framework.response import Response
 # from rest_framework.views import APIView
@@ -57,6 +57,32 @@ class RestaurantDetailView (DetailView):
 
 class Cart(TemplateView):
     template_name = "delivery_app/basket.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cart_total'] = basket_total(self.request)
+        context['cart'] = get_basket_as_dict(self.request)
+        return context
+
+    @staticmethod
+    def cart_dish_sub(request, pk_dish):
+        basket_sub(request, pk_dish)
+        return redirect('cart')
+
+    @staticmethod
+    def cart_dish_add(request, pk_dish):
+        dish = get_object_or_404(Dish, pk=pk_dish)
+        basket_add(request, dish)
+        return redirect('cart')
+
+    @staticmethod
+    def cart_clear(request):
+        basket_clear(request)
+        return redirect('restaurants_list_url')
+
+
+class MakeOrder(TemplateView):
+    template_name = "delivery_app/make_order.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

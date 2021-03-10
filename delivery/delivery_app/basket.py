@@ -16,6 +16,27 @@ def basket_add(request, dish):
     # print('Полная сумма = ', basket_total(request))
 
 
+def basket_sub(request, dish_pk):
+    b = request.session.get('basket')
+    print(b)
+    for key, value in b.items():
+        if key == str(dish_pk):
+            print('Отнимаем от блюда', value['name'])
+            if value['count'] > 1:
+                b[key]['count'] -= 1
+            else:
+                del b[key]
+            request.session['basket'] = b
+            request.session.save()
+            return
+
+
+def basket_clear(request):
+    request.session['basket'] = {}
+    request.session.save()
+    return
+
+
 def basket_total(request):
     b = request.session.get('basket')
     count = 0
