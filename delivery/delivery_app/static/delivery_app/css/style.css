@@ -590,6 +590,35 @@ button {
     justify-content: flex-end;
 }
 
+.form-address-header {
+    margin: 0;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 42px;
+}
+
+.form-address {
+    display: block;
+}
+
+.form-address-row {
+    display: flex;
+    padding-bottom: 8px;
+}
+
+.form-address-error {
+    color: red;
+}
+
+.form-address-label {
+    flex: 0 0 25%;
+}
+
+.form-address-input {
+    flex: 0 0 75%;
+    max-width: 100%
+}
+
 @media (max-width: 1366px) {
     .container {
         max-width: 960px;

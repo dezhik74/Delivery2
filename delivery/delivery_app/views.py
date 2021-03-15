@@ -1,7 +1,9 @@
 # from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, TemplateView
-from .models import Restaurant, Dish, PromoBox
+
+from .forms import DeliveryForm
+from .models import Restaurant, Dish, PromoBox, DeliveryOrder
 from .basket import basket_add, basket_total, get_basket_as_dict, basket_sub, basket_clear
 from rest_framework import generics
 # from rest_framework.response import Response
@@ -19,18 +21,8 @@ class RestaurantListView (ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # tanuki = get_object_or_404(Restaurant, name='Пицца-плюс')
-        # context['tanuki_dishes'] = Dish.objects.filter(restaurant__pk=tanuki.pk)
-        # context['dishes'] = Dish.objects.all()
-        # promo_backs = ['pizza', 'kebab', 'vegetables', 'sushi']
-        # promo_texts = ['Блюда из любимого ресторана привезет курьер в перчатках, маске и с антисептиком',
-        #                'Закажите шашлыки в любом ресторане до 10 мая и получите скидку по промокоду OMAGAD',
-        #                'Блюдо из ресторана привезут вместе с двумя подарочными книгами по фронтенду',
-        #                'Скидки на сеты до 30 мая по промокоду DADADA']
         random.seed()
         context['promo'] = PromoBox.objects.get(pk=random.randint(1, len(PromoBox.objects.all())))
-        # context['promo_back'] = promo_backs[random.randint(0, 3)]
-        # context['promo_text'] = promo_texts[random.randint(0, 3)]
         context['cart_total'] = basket_total(self.request)
         return context
 
@@ -88,7 +80,21 @@ class MakeOrder(TemplateView):
         context = super().get_context_data(**kwargs)
         context['cart_total'] = basket_total(self.request)
         context['cart'] = get_basket_as_dict(self.request)
+        context['form'] = DeliveryForm()
         return context
+
+    def post(self, request):
+        form = DeliveryForm(request.POST)
+        if form.is_valid():
+            # print(get_basket_as_dict(request))
+            # print(form.cleaned_data)
+            DeliveryOrder.save_in_base(form.cleaned_data, get_basket_as_dict(request))
+            basket_clear(request)
+            return redirect('thank_you_url')
+
+
+class ThankYouView(TemplateView):
+    template_name = "delivery_app/thanks.html"
 
 
 class RestaurantListAPIVew (generics.ListAPIView):

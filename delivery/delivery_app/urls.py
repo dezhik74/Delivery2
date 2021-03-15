@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import RestaurantListView, RestaurantDetailView, RestaurantListAPIVew, RestaurantDetailAPIView, Cart, \
-    MakeOrder
+    MakeOrder, ThankYouView
 
 urlpatterns = [
     path('', RestaurantListView.as_view(), name='restaurants_list_url'),
@@ -12,6 +12,7 @@ urlpatterns = [
     path('cart-dish-add/<int:pk_dish>/', Cart.cart_dish_add, name='cart_dish_add_url'),
     path('cart-clear/', Cart.cart_clear, name='cart_clear_url'),
     path('make-order/', MakeOrder.as_view(), name='make_order'),
+    path('thank-you/', ThankYouView.as_view(), name='thank_you_url'),
     path('api/v1/restaurants/', RestaurantListAPIVew.as_view()),
     path('api/v1/<int:pk>/', RestaurantDetailAPIView.as_view()),
     ]

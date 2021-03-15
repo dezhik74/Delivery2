@@ -36,8 +36,23 @@
 			</div>
 			<!-- /.modal-footer -->
             <div class="modal-header">
-				<h3 class="modal-title">Адрес доставки</h3>
+				<h4 class="form-address-header">Информация о доставке</h4>
 			</div>
+			<form action="" method="post" class="form-address">
+				{% csrf_token %}
+				{% for field in form %}
+                <div class="form-address-error">
+                    {{ field.errors }}
+                </div>
+                    <div class="form-address-row">
+                        <div class="form-address-label">
+                            {{field.label}}
+                        </div>
+                        {{field}}
+                    </div>
+				{% endfor %}
+                <input type="submit" value="Оформить заказ" class="button">
+			</form>
 		</div>
 
 		<!-- /.modal-dialog -->
