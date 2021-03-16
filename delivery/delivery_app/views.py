@@ -96,6 +96,11 @@ class MakeOrder(TemplateView):
 class ThankYouView(TemplateView):
     template_name = "delivery_app/thanks.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cart_total'] = basket_total(self.request)
+        return context
+
 
 class RestaurantListAPIVew (generics.ListAPIView):
     queryset = Restaurant.objects.all()
