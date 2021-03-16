@@ -143,4 +143,4 @@ CORS_ORIGIN_WHITELIST = [
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 
 # Activate Django-Heroku.
-django_heroku.settings(locals())
+django_heroku.settings(locals(databases=False))
