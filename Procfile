@@ -1,1 +1,0 @@
-web: cd delivery && gunicorn delivery.wsgi
