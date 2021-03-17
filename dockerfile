@@ -10,5 +10,3 @@ COPY . /code/
 WORKDIR /code/delivery/
 RUN pip install -r ../requirements.txt
 RUN pip install gunicorn
-RUN echo "Collect static files..."
-RUN python manage.py collectstatic --noinput

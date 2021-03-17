@@ -29,7 +29,7 @@ if os.getenv('APP_LAUNCH_SITE') == 'docker':
 else:
     DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost','*']
 
 
 # Application definition

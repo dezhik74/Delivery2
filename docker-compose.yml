@@ -3,14 +3,14 @@ version: '3'
 services:
   web2:
     build: .
-    command: gunicorn -b 0.0.0.0:8000 delivery.wsgi:application
+    command: ../delivery_init.sh
     environment:
-        APP_LAUNCH_SITE: docker
-    container_name: 'app1'
+        APP_LAUNCH_SITE: docker_debug
+    container_name: 'delivery'
     restart: always
     volumes:
       - .:/code
     expose:
        - "84"
     ports:
-       - "84:8000"
+       - "84:84"
