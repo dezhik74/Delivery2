@@ -5,12 +5,22 @@ services:
     build: .
     command: ../delivery_init.sh
     environment:
-        APP_LAUNCH_SITE: docker_debug
+        APP_LAUNCH_SITE: docker
     container_name: 'delivery'
     restart: always
     volumes:
       - .:/code
     expose:
-       - "84"
+       - 8084
+
+  nginx2:
+    container_name: 'srv2'
+    restart: always
+    image: nginx:latest
+    depens_on: web2
     ports:
-       - "84:84"
+      - 84:8084
+    volumes:
+      - ./nginx:/etc/nginx/conf.d #папка для конфигурации nginx
+      - ./delivery/static:/srv/www/acts/static #статика приложения delivery2
+      - ./delivery/media:/srv/www/acts/media #загружнные картинки приложения delivery2

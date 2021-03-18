@@ -14,9 +14,9 @@ python manage.py collectstatic --noinput
 # python manage.py migrate
 
 echo "Starting server..."
-echo "Django development server..."
-python manage.py runserver 0.0.0.0:84
+#echo "Django development server..."
+#python manage.py runserver 0.0.0.0:84
 
-#echo "Gunicorn server"
-#gunicorn -b 0.0.0.0:84 delivery.wsgi:application
+echo "Gunicorn server"
+gunicorn -b 0.0.0.0:84 delivery.wsgi:application
 
