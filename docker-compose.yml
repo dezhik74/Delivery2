@@ -17,10 +17,11 @@ services:
     container_name: 'srv2'
     restart: always
     image: nginx:latest
-    depens_on: web2
+    depends_on: 
+      - web2
     ports:
       - 84:8084
     volumes:
-      - ./nginx:/etc/nginx/conf.d #папка для конфигурации nginx
-      - ./delivery/static:/srv/www/acts/static #статика приложения delivery2
-      - ./delivery/media:/srv/www/acts/media #загружнные картинки приложения delivery2
+      - ../nginx:/etc/nginx/conf.d #папка для конфигурации nginx
+      - ../delivery/static:/srv/www/acts/static #статика приложения delivery2
+      - ../delivery/media:/srv/www/acts/media #загружнные картинки приложения delivery2
