@@ -20,8 +20,9 @@ services:
     depends_on: 
       - web2
     ports:
-      - 84:8084
+      - 84:80
     volumes:
-      - ../nginx:/etc/nginx/conf.d #папка для конфигурации nginx
-      - ../delivery/static:/srv/www/acts/static #статика приложения delivery2
-      - ../delivery/media:/srv/www/acts/media #загружнные картинки приложения delivery2
+      - ./nginx:/etc/nginx/conf.d #папка для конфигурации nginx
+      - ./delivery/static:/srv/www/static/ #статика приложения delivery2
+      - ./delivery/media:/srv/www/media/ #загружнные картинки приложения delivery2
+      - ./logs:/srv/www/logs/ # удаляется папка в контейнере и заменяется на папку их хоста, логи nginx
